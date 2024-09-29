@@ -27,4 +27,30 @@ test('Возвращает корректное значение для чисе
   expect(convertBytesToHuman(1073741824)).toBe('1.00 GB');
 });
 
-// другая группа проверок
+test('Возвращает корректное значение для граничных значений', () => {
+  expect(convertBytesToHuman(1023)).toBe('1023.00 B');
+  expect(convertBytesToHuman(1024 * 1024 - 1)).toBe('1024.00 KB');
+  expect(convertBytesToHuman(1024 * 1024)).toBe('1.00 MB');
+});
+
+test('Корректно обрабатывает большие значения', () => {
+  expect(convertBytesToHuman(1024 ** 4)).toBe('1.00 TB');
+  expect(convertBytesToHuman(1024 ** 5)).toBe('1.00 PB');
+  expect(convertBytesToHuman(1024 ** 6)).toBe('1024.00 PB');
+});
+
+test('Обрабатывает некорректные числовые значения', () => {
+  expect(convertBytesToHuman(Infinity)).toBe(false); 
+  expect(convertBytesToHuman(-Infinity)).toBe(false);  
+});
+
+test('Корректно обрабатывает случаи с плавающей запятой', () => {
+  expect(convertBytesToHuman(1024.5)).toBe('1.00 KB');
+  expect(convertBytesToHuman(123456789)).toBe('117.74 MB');
+});
+
+test('Корректно работает с очень маленькими числами', () => {
+  expect(convertBytesToHuman(1)).toBe('1.00 B');
+  expect(convertBytesToHuman(999)).toBe('999.00 B'); 
+});
+

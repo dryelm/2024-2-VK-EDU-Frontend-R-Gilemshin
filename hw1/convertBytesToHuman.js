@@ -20,7 +20,7 @@ export default function convertBytesToHuman(bytes) {
   const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
   if (bytes === 0) return '0.00 B';
 
-  const i = Math.floor(Math.log(bytes) / Math.log(1024));
+  const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), sizes.length - 1);
   const size = bytes / Math.pow(1024, i);
   
   return size.toFixed(2) + ' ' + sizes[i];
