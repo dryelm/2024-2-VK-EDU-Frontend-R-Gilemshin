@@ -1,7 +1,7 @@
 /*
 You are given a non-empty list of integers (X).
 
-For this task, you should return a list consisting of
+For this task,  you should return a list consisting of
 only the non-unique elements in this list.
 
 To do so you will need to remove all unique elements
@@ -25,5 +25,18 @@ nonUniqueElements([10, 9, 10, 10, 9, 8]) == [10, 9, 10, 10, 9]
  */
 
 export default function nonUniqueElements(data) {
-  return data.filter(item => data.indexOf(item) !== data.lastIndexOf(item));
+  if (!Array.isArray(data)) {
+    throw new Error("Input must be an array");
+  }
+
+  const counts = new Map();
+
+  data.forEach(item => {
+    if (typeof item !== "number" || item.toFixed(0) !== item.toString()){
+      throw new Error("Items of array must be an integers");
+    }
+    counts.set(item, (counts.get(item) || 0) + 1);
+  });
+
+  return data.filter(item => counts.get(item) > 1);
 }
