@@ -5,16 +5,17 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import htmlPurge from 'vite-plugin-html-purgecss'
  
 export default defineConfig({
+    base: "2024-2-VK-EDU-Frontend-R-Gilemshin",
 
-plugins: [
+    plugins: [
 
-    createHtmlPlugin({
+        createHtmlPlugin({
 
-    template: 'src/index.html',
+            template: 'src/index.html',
 
-    entry: "/src"
+            entry: "/src"
 
-    }),
-    htmlPurge()
+        }),
+        htmlPurge()
 ],
 })
