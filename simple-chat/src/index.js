@@ -13,6 +13,8 @@ function addMessage(text, sender, time) {
     //пока так, не хочу возится с модульностью без нормального шаблонизатора
     messageElement.innerText = `${sender} (${time}): ${text}`;
     messagesContainer.appendChild(messageElement);
+    messageElement.scrollIntoView({ behavior: 'smooth' });
+    
 }
 
 function saveMessage(text, sender, time) {
@@ -38,6 +40,7 @@ function loadMessages() {
     messages.forEach(message => {
         addMessage(message.text, message.sender, message.time);
     });
+
 }
 
 

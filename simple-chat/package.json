@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "vite build",
-    "dev": "vite"
+    "dev": "vite dev"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
