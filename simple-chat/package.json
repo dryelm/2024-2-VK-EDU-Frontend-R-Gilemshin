@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "vite-plugin-html": "^3.2.2",
+    "vite-plugin-html-purgecss": "^0.1.1"
+  },
+  "dependencies": {
+    "vite": "^5.4.8"
+  }
+}
