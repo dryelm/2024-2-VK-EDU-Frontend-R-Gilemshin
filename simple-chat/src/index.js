@@ -2,7 +2,7 @@ import { createHeader } from './components/app-header/app-header';
 import { createChatList } from './components/chat-list/chat-list';
 import { createNewChatButton } from './components/new-chat/new-chat';
 import './index.css';
-import './chat-list.css'
+import './components/chat-list/chat-list.css'
 
 import imgUrl1 from './public/avatar.png';
 
