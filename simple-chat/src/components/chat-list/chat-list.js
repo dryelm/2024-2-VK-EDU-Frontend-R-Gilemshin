@@ -1,4 +1,5 @@
 import { createPersonalChat } from '../../pages/personal_chat';
+import './chat-list.css'
 
 export function createChatList(){
     const chatList = [

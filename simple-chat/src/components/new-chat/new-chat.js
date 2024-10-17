@@ -1,3 +1,5 @@
+import './new-chat.css'
+
 export function createNewChatButton(){
     const addButton = document.createElement('button');
     addButton.classList.add('add_chat_button');
