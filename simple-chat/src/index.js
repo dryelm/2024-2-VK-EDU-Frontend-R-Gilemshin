@@ -1,5 +1,5 @@
 import { createHeader } from './components/app-header';
-import { createChatList } from './components/chat-list';
+import { createChatList } from './components/chat-list/chat-list';
 import { createNewChatButton } from './components/new-chat';
 import './index.css';
 
