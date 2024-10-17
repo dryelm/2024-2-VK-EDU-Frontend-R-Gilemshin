@@ -124,7 +124,7 @@ input {
     line-height: 1.25em;
 }   
 
-#avatar{
+.avatar{
     width: 2em;
     height: 2em;
 }

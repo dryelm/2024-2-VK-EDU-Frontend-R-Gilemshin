@@ -1,18 +1,16 @@
+import styles from "./personal_chat.module.css"; 
+import imgUrl from "../../public/avatar.png"; 
+import createChatListPage from '../..'; 
 
-import "./personal_chat.css"
-const senderName = 'Я'; 
-import imgUrl from "../../public/avatar.png"
-import createChatListPage from '../..';
+const senderName = 'Я';
 
 function addMessage(text, sender, time) {
     const messageElement = document.createElement('div');
-    const messagesContainer = document.querySelector('.messages');
-    messageElement.classList.add('message');
-    //пока так, не хочу возится с модульностью без нормального шаблонизатора
+    const messagesContainer = document.querySelector(`.${styles.messages}`);
+    messageElement.classList.add(styles.message);
     messageElement.innerText = `${sender} (${time}): ${text}`;
     messagesContainer.appendChild(messageElement);
     messageElement.scrollIntoView({ behavior: 'smooth' });
-    
 }
 
 function saveMessage(text, sender, time) {
@@ -21,16 +19,15 @@ function saveMessage(text, sender, time) {
     localStorage.setItem('messages', JSON.stringify(messages));
 }
 
-
 function handleSubmit(event) {
     event.preventDefault();
-    const input = document.querySelector('.form-input input');
+    const input = document.querySelector(`.${styles["form-input"]} input`);
     const messageText = input.value;
     if (messageText.trim() !== '') {
         const currentTime = new Date().toLocaleTimeString();
         addMessage(messageText, senderName, currentTime);
         saveMessage(messageText, senderName, currentTime);
-        input.value = ''; 
+        input.value = '';
     }
 }
 
@@ -39,38 +36,31 @@ function loadMessages() {
     messages.forEach(message => {
         addMessage(message.text, message.sender, message.time);
     });
-
 }
 
-function onBack(){
+function onBack() {
     document.body.innerHTML = "";
     createChatListPage();
 }
 
-
-
-
 export function createPersonalChat() {
     const form = document.createElement('form');
-    form.classList.add('form');
+    form.classList.add(styles.form);
     form.action = "/";
 
     const formHeader = document.createElement('header');
-    formHeader.classList.add('form__header');
+    formHeader.classList.add(styles["form__header"]);
 
     const backButton = document.createElement('span');
     backButton.classList.add('material-symbols-outlined');
     backButton.textContent = 'arrow_back';
-    backButton.addEventListener('click', () => {
-        document.body.innerHTML = '';
-        createChatListPage();
-        console.log('sdasd')
-    });
+    backButton.addEventListener('click', onBack);
     formHeader.appendChild(backButton);
 
     const avatar = document.createElement('img');
     avatar.id = 'avatar';
     avatar.src = imgUrl;
+    avatar.classList.add(styles["avatar"])
     formHeader.appendChild(avatar);
 
     const article = document.createElement('article');
@@ -95,18 +85,18 @@ export function createPersonalChat() {
     form.appendChild(formHeader);
 
     const messagesDiv = document.createElement('div');
-    messagesDiv.classList.add('messages');
+    messagesDiv.classList.add(styles.messages);
 
     const othersMessage = document.createElement('div');
-    othersMessage.classList.add('others_message');
+    othersMessage.classList.add(styles["others_message"]);
 
     const messageText = document.createElement('p');
-    messageText.classList.add('others_message__text');
+    messageText.classList.add(styles["others_message__text"]);
     messageText.textContent = 'Есть над чем задуматься: непосредственные участники технического прогресса рассмотрены исключительно в разрезе маркетинговых и финансовых предпосылок.';
     othersMessage.appendChild(messageText);
 
     const messageTime = document.createElement('div');
-    messageTime.classList.add('others_message__time');
+    messageTime.classList.add(styles["others_message__time"]);
     messageTime.textContent = '04:20';
     othersMessage.appendChild(messageTime);
 
@@ -114,7 +104,7 @@ export function createPersonalChat() {
     form.appendChild(messagesDiv);
 
     const formInputDiv = document.createElement('div');
-    formInputDiv.classList.add('form-input');
+    formInputDiv.classList.add(styles["form-input"]);
 
     const messageInput = document.createElement('input');
     messageInput.name = 'message-text';
@@ -128,14 +118,13 @@ export function createPersonalChat() {
     formInputDiv.appendChild(attachmentIcon);
 
     form.appendChild(formInputDiv);
-
     document.body.appendChild(form);
 
     loadMessages();
 
     form.addEventListener('submit', handleSubmit);
     messageInput.addEventListener('keydown', function (event) {
-        if (event.key === "Enter" && !event.shiftKey) { 
+        if (event.key === "Enter" && !event.shiftKey) {
             event.preventDefault();
             form.dispatchEvent(new Event('submit'));
         }

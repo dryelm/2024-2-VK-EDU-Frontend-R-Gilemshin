@@ -1,5 +1,6 @@
 import { createPersonalChat } from '../../pages/personal_chat';
-import './chat-list.css'
+import styles from './chat-list.module.css'
+import imgUrl from '../../public/avatar.png'
 
 export function createChatList(){
     const chatList = [
@@ -17,15 +18,14 @@ export function createChatList(){
     chatListHtml.classList.add('chat_list');
     chatList.forEach(chat => {
         const chatItem = document.createElement('li');
-        chatItem.classList.add('personal_chat');
-        chatItem.innerHTML = `
-            <img class="personal_chat__avatar" />
-            <h6 class="personal_chat__name">${chat.name}</h6>
-            <p class="personal_chat__preview">${chat.preview}</p>
-            <p class="personal_chat__time">${chat.time}</p>
-            <span class="personal_chat__status material-symbols-outlined">${chat.status}</span>
-        `;
-    
+        chatItem.classList.add(styles['personal_chat']);
+
+        chatItem.appendChild(createAvatar());
+        chatItem.appendChild(createName(chat.name));
+        chatItem.appendChild(createPreview(chat.preview));
+        chatItem.appendChild(createTime(chat.time));
+        chatItem.appendChild(createStatus(chat.status));
+
         chatItem.addEventListener('click', () => {
             document.body.innerHTML = '';
             createPersonalChat();
@@ -35,4 +35,40 @@ export function createChatList(){
     });
 
     document.body.appendChild(chatListHtml);
+}
+
+function createAvatar() {
+    const img = document.createElement('img');
+    img.classList.add(styles['personal_chat__avatar']);
+    img.src = imgUrl;
+    return img;
+}
+
+function createName(name) {
+    const nameElement = document.createElement('h6');
+    nameElement.classList.add(styles['personal_chat__name']);
+    nameElement.textContent = name;
+    return nameElement;
+}
+
+function createPreview(preview) {
+    const previewElement = document.createElement('p');
+    previewElement.classList.add(styles['personal_chat__preview']);
+    previewElement.textContent = preview;
+    return previewElement;
+}
+
+function createTime(time) {
+    const timeElement = document.createElement('p');
+    timeElement.classList.add(styles['personal_chat__time']);
+    timeElement.textContent = time;
+    return timeElement;
+}
+
+
+function createStatus(status) {
+    const statusElement = document.createElement('span');
+    statusElement.classList.add(styles['personal_chat__status'], 'material-symbols-outlined');
+    statusElement.textContent = status; 
+    return statusElement;
 }
