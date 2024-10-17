@@ -7,7 +7,6 @@ import './components/chat-list/chat-list.css'
 import imgUrl1 from './public/avatar.png';
 
 export default function createChatListPage(){
-    
     createHeader();
     createChatList();
     createNewChatButton();
