@@ -14,11 +14,52 @@ li{
     gap: 0.5em;
 }
 
+.personal_chat:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.personal_chat:hover > .personal_chat__avatar{
+    animation: none;
+}
 .personal_chat__avatar{
     grid-row: span 2;
     height: 4em;
     border-radius: 2em;
+    box-shadow: 0 0 0 var(--main-color);
+    
 }
+
+.pulse{ 
+    animation: pulse 2s infinite;
+}
+
+
+/*@-webkit-keyframes pulse {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+    70% {
+        -webkit-box-shadow: 0 0 0 10px var(--main-color-40);
+    }
+    100% {
+        -webkit-box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+  }*/
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+    70% {
+        box-shadow: 0 0 0 10px var(--main-color-40);
+    }
+    100% {
+
+        box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+  }
+
 
 .personal_chat__name{
     font-size: 1.25em;

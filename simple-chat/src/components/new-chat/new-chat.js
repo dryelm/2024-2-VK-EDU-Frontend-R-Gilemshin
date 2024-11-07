@@ -3,6 +3,9 @@ import styles from './new-chat.module.css'
 export function createNewChatButton(){
     const addButton = document.createElement('button');
     addButton.classList.add(styles["add_chat_button"]);
-    addButton.innerHTML = `<span class="material-symbols-outlined">edit</span>`;
+    const icon = document.createElement('span');
+    icon.classList.add('material-symbols-outlined', styles["black-icon"]);
+    icon.textContent = 'edit';
+    addButton.appendChild(icon);
     document.body.appendChild(addButton);
 }
