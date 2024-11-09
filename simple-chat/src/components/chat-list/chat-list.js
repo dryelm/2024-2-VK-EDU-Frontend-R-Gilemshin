@@ -16,11 +16,11 @@ export function createChatList(){
     
     const chatListHtml = document.createElement('ul');
     chatListHtml.classList.add('chat_list');
-    chatList.forEach(chat => {
+    chatList.forEach((chat, index) => {
         const chatItem = document.createElement('li');
         chatItem.classList.add(styles['personal_chat']);
 
-        chatItem.appendChild(createAvatar());
+        chatItem.appendChild(createAvatar(index === 0));
         chatItem.appendChild(createName(chat.name));
         chatItem.appendChild(createPreview(chat.preview));
         chatItem.appendChild(createTime(chat.time));
@@ -37,9 +37,10 @@ export function createChatList(){
     document.body.appendChild(chatListHtml);
 }
 
-function createAvatar() {
+function createAvatar(pulse = false) {
     const img = document.createElement('img');
     img.classList.add(styles['personal_chat__avatar']);
+    img.classList.add(styles['pulse']);
     img.src = imgUrl;
     return img;
 }

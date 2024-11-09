@@ -8,3 +8,14 @@
     height: 4em;
     width: 4em;
 }
+
+.black-icon{
+    font-size: 2em;
+    color: rgba(0, 0, 0);
+    cursor: pointer;
+}
+
+.black-icon:hover{
+    color: rgba(0, 0, 0, 0.8);
+}
+
