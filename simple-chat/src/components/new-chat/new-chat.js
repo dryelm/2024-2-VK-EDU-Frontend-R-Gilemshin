@@ -1,4 +1,4 @@
-import styles from './new-chat.module.css'
+import styles from '../../../../react-chat/src/pages/СhatListPage/components/new-chat-button/new-chat.module.css'
 
 export function createNewChatButton(){
     const addButton = document.createElement('button');
