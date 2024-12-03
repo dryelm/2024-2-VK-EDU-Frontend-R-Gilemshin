@@ -4,7 +4,7 @@ import {useState} from "react";
 import {Page} from "./utils/types/Page.js";
 import {PersonalChat} from "./pages/PersonalChat/PersonalChat.jsx";
 
-function App() {
+export function App() {
     const [page, setPage] = useState(0)
     switch (page) {
         case (Page["ChatListPage"]):
@@ -13,5 +13,3 @@ function App() {
             return <PersonalChat changePage={setPage} />
     }
 }
-
-export default App
