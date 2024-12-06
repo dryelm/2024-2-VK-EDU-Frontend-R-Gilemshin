@@ -1,4 +1,4 @@
-import styles from './app-header.module.css';
+import styles from '../../../../react-chat/src/pages/СhatListPage/components/app-header/app-header.module.css';
 
 
 export function createHeader() {

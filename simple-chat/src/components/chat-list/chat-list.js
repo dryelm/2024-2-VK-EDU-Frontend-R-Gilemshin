@@ -1,6 +1,6 @@
 import { createPersonalChat } from '../../pages/personal_chat';
-import styles from './chat-list.module.css'
-import imgUrl from '../../public/avatar.png'
+import styles from '../../../../react-chat/src/pages/СhatListPage/components/chat-list/chat-list.module.css'
+import imgUrl from '../../../../react-chat/src/assets/avatar.png'
 
 export function createChatList(){
     const chatList = [

@@ -1,5 +1,5 @@
 import styles from "./personal_chat.module.css"; 
-import imgUrl from "../../public/avatar.png"; 
+import imgUrl from "../../../../react-chat/src/assets/avatar.png";
 import createChatListPage from '../..'; 
 
 const senderName = 'Я';
