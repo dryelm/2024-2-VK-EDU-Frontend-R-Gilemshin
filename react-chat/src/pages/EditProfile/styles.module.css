@@ -1,0 +1,54 @@
+.profile_picture__img{
+    display: block;
+    height: 6em;
+    width: 6em;
+    border-radius: 3em;
+    margin: 5em auto auto;
+    object-fit: cover;
+    filter: brightness(60%)
+}
+
+.camera_icon{
+    position: relative;
+    left: calc(50% - 12px);
+    bottom: calc(3em + 12px);
+    color: var(--main-bg-color);
+}
+
+.input_blocks{
+    margin: 2em;
+}
+
+.input_block{
+    padding: 1em;
+    margin-top: 2em;
+    background-color: var(--secondary-bg-color);
+    border-bottom: #333 solid;
+    border-radius: 0.25em;
+}
+
+.input_block__input{
+    margin-top: 1em;
+    font-size: 1.5em;
+    background-color:var(--secondary-bg-color);
+    border-bottom: 1px #333 solid;
+}
+
+.input_block__large_input{
+    margin-top: 1em;
+    font-size: 1.5em;
+    background-color:var(--secondary-bg-color);
+    border: none;
+    border-bottom: 1px #333 solid;
+    resize: none;
+    height: 10em;
+    width: 100%;
+    outline: none;
+}
+
+.remark{
+    display: block;
+    margin-top: 0.75em;
+    font-size: 0.9em;
+    margin-left: 1em;
+}

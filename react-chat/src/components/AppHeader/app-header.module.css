@@ -4,6 +4,7 @@
     position: sticky;
     top: 0;
     align-items: center;
+    min-height: 5em;
     padding: 15px;
     background-color: var(--main-color);
     color: var(--main-bg-color);

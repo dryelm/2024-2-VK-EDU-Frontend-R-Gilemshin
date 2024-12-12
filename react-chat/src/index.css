@@ -10,6 +10,7 @@ body {
   --main-bg-color: #fff;
   --main-color-0: rgba(142, 36, 170, 0);
   --main-color-40: rgba(142, 36, 170, 0.4);
+  --secondary-bg-color: #ededed;
   margin: 0;
   background-color :var(--main-bg-color);
   color: #333;
@@ -41,4 +42,11 @@ body {
   font-weight: inherit;
   line-height: inherit;
   margin-inline: 0;
+}
+
+a:active, /* активная/посещенная ссылка */
+a:hover,  /* при наведении */
+a {
+  text-decoration: none;
+  color: inherit;
 }

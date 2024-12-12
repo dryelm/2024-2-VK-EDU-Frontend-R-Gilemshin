@@ -1,15 +1,18 @@
 import './App.css'
 import {ChatListPage} from "./pages/СhatListPage/ChatListPage.jsx";
-import {useState} from "react";
-import {Page} from "./utils/types/Page.js";
+import {HashRouter, Route, Routes} from "react-router-dom";
 import {PersonalChat} from "./pages/PersonalChat/PersonalChat.jsx";
+import {EditProfile} from "./pages/EditProfile/EditProfile.jsx";
 
 export function App() {
-    const [page, setPage] = useState(0)
-    switch (page) {
-        case (Page["ChatListPage"]):
-            return <ChatListPage changeState={setPage}/>
-        case (Page["PersonalChat"]):
-            return <PersonalChat changePage={setPage} />
-    }
+
+    return (
+        <HashRouter>
+            <Routes>
+                <Route path={"/"} element={<ChatListPage />} />
+                <Route path={"/chat/:id"} element={<PersonalChat />}/>
+                <Route path={"/profile/edit"} element={<EditProfile />}/>
+            </Routes>
+        </HashRouter>
+    )
 }

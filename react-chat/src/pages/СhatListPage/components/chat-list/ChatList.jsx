@@ -1,12 +1,13 @@
-import React from 'react';
 import styles from './chat-list.module.css';
 import imgUrl from '../../../../assets/avatar.png';
 import {Done, DoneAll} from "@mui/icons-material";
-import {Page} from "../../../../utils/types/Page.js";
+import {Link} from "react-router-dom";
+import {AppRoutes} from "../../../../utils/types/AppRoutes.js";
 
-export function ChatList({changePage}) {
+export function ChatList() {
     const chatList = [
         {
+            id: "1",
             avatar: '/public/avatar.png',
             name: 'Дженнифер',
             preview: 'Есть над чем задуматься: непосредственные участники технического прогресса рассмотрены исключительно в разрезе маркетинговых и финансовых предпосылок.',
@@ -14,6 +15,7 @@ export function ChatList({changePage}) {
             status: 'done_all'
         },
         {
+            id: "2",
             avatar: 'avatar.png',
             name: 'Дженнифер',
             preview: 'Есть над чем задуматься',
@@ -25,13 +27,15 @@ export function ChatList({changePage}) {
     return (
         <ul>
             {chatList.map((chat, index) => (
-                <li key={index} onClick={() => changePage(Page["PersonalChat"])} className={styles.personal_chat}>
-                    <Avatar pulse={index === 0} />
-                    <Name name={chat.name} />
-                    <Preview preview={chat.preview} />
-                    <Time time={chat.time} />
-                    <Status status={chat.status} />
-                </li>
+                <Link key={index} to={`${AppRoutes.Chat}${chat.id}`}>
+                    <li  className={styles.personal_chat}>
+                        <Avatar pulse={index === 0} />
+                        <Name name={chat.name} />
+                        <Preview preview={chat.preview} />
+                        <Time time={chat.time} />
+                        <Status status={chat.status} />
+                    </li>
+                </Link>
             ))}
         </ul>
     );
