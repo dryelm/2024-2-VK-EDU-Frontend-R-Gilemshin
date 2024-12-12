@@ -33,7 +33,6 @@ export function LargeField({label, placeHolder, value, setValue}) {
                     placeholder={placeHolder}
                 />
             </label>
-
         </div>
     );
 }

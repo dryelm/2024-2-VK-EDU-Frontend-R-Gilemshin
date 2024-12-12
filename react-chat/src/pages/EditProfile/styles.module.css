@@ -10,6 +10,7 @@
 
 .camera_icon{
     position: relative;
+    display: inline;
     left: calc(50% - 12px);
     bottom: calc(3em + 12px);
     color: var(--main-bg-color);
