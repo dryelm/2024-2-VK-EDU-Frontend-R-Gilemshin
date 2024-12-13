@@ -1,15 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import imgUrl from "../../../../react-chat/src/assets/avatar.png";
-import {Page} from "../../utils/types/Page.js";
 import {ArrowBack, Attachment, MoreVert, Search} from "@mui/icons-material";
 import styles from "./styles.module.css"
-import {TextInput} from "../../components/TextInput/TextInput.jsx";
+import {LargeTextInput} from "../../components/LargeTextInput/LargeTextInput.jsx";
+import {Link} from "react-router-dom";
+import {AppHeader} from "../../components/AppHeader/AppHeader.jsx";
+import {AppRoutes} from "../../utils/types/AppRoutes.js";
 
 const senderName = 'Челик';
 const me = "Я";
 
-export function PersonalChat({changePage}) {
+export function PersonalChat() {
     const othersMessage = { messages: [
             {
                 text: "Есть над чем задуматься: непосредственные участники технического прогресса рассмотрены исключительно в разрезе маркетинговых и финансовых предпосылок.",
@@ -42,10 +44,6 @@ export function PersonalChat({changePage}) {
         }
     };
 
-    const handleBack = () => {
-        changePage(Page.ChatListPage);
-    };
-
     useEffect(() => {
         window.scrollTo({
             top: document.body.scrollHeight,
@@ -55,20 +53,31 @@ export function PersonalChat({changePage}) {
 
     const messageContainerRef = useRef(null);
 
-
-
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
-            <header className={styles.form__header}>
-                <ArrowBack onClick={handleBack}/>
-                <img id="avatar" src={imgUrl} alt="Avatar" className={styles.avatar} />
-                <article>
-                    <h5>челик</h5>
-                    <h6>был 2 часа назад</h6>
-                </article>
-                <Search/>
-                <MoreVert/>
-            </header>
+            <AppHeader
+                leftButtons={
+                        <Link to={AppRoutes.HomePage}>
+                            <ArrowBack/>
+                        </Link>
+                }
+                pageDescription={
+                        <>
+                            <img id="avatar" src={ imgUrl } alt="Avatar" className={ styles.avatar }/>
+                            <article>
+                                <h5>челик</h5>
+                                <h6>был 2 часа назад</h6>
+                            </article>
+                        </>
+                }
+                rightButtons={
+                        <>
+                            <Search/>
+                            <MoreVert/>
+                        </>
+                }
+            />
+
 
             <div className={styles.messages}>
                 {messages.map((message, index) => ( message.sender === me
@@ -77,7 +86,7 @@ export function PersonalChat({changePage}) {
             </div>
 
             <div ref={messageContainerRef} className={styles.new_message}>
-                <TextInput
+                <LargeTextInput
                     value={messageText}
                     className={styles.new_message__input}
                     placeholder={"Сообщение"}

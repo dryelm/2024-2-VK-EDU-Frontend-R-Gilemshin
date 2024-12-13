@@ -1,15 +1,15 @@
-
-
-export function TextInput({className, onInput, value, placeholder}){
+export function LargeTextInput({className, onInput, value, placeholder, onKeyDown}) {
     const handleInput = (e) => {
         onInput(e.target.value);
     };
+
     return (
-        <input
+        <textarea
             className={className}
             value={value}
             placeholder={placeholder}
-            onInput={handleInput}
+            onChange={handleInput}
+            onKeyDown={onKeyDown}
         />
-    )
+    );
 }
