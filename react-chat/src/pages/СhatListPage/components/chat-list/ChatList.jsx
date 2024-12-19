@@ -1,39 +1,18 @@
 import styles from './chat-list.module.css';
-import imgUrl from '../../../../assets/avatar.png';
-import {Done, DoneAll} from "@mui/icons-material";
 import {Link} from "react-router-dom";
 import {AppRoutes} from "../../../../utils/types/AppRoutes.js";
 
-export function ChatList() {
-    const chatList = [
-        {
-            id: "1",
-            avatar: '/public/avatar.png',
-            name: 'Дженнифер',
-            preview: 'Есть над чем задуматься: непосредственные участники технического прогресса рассмотрены исключительно в разрезе маркетинговых и финансовых предпосылок.',
-            time: '13:25',
-            status: 'done_all'
-        },
-        {
-            id: "2",
-            avatar: 'avatar.png',
-            name: 'Дженнифер',
-            preview: 'Есть над чем задуматься',
-            time: '13:25',
-            status: 'done'
-        },
-    ];
-
+export function ChatList({chatList}) {
     return (
         <ul>
             {chatList.map((chat, index) => (
-                <Link key={index} to={`${AppRoutes.Chat}${chat.id}`}>
-                    <li  className={styles.personal_chat}>
-                        <Avatar pulse={index === 0} />
+                <Link key={index} to={`${AppRoutes.Chat}/${chat.id}`}>
+                    <li className={styles.personal_chat}>
+                        <Avatar pulse={index === 0} avatarPath={chat.avatar} />
                         <Name name={chat.name} />
                         <Preview preview={chat.preview} />
                         <Time time={chat.time} />
-                        <Status status={chat.status} />
+                        <UnreadMessages unread_messages={chat.unread_messages} />
                     </li>
                 </Link>
             ))}
@@ -41,8 +20,8 @@ export function ChatList() {
     );
 }
 
-function Avatar({ pulse }) {
-    return <img className={`${styles.personal_chat__avatar} ${pulse ? styles.pulse : ''}`} src={imgUrl} alt="avatar" />;
+function Avatar({ avatarPath, pulse = false }) {
+    return avatarPath ? <img className={`${styles.personal_chat__avatar} ${pulse ? styles.pulse : ''}`} src={avatarPath} alt="avatar" /> : <div></div>;
 }
 
 function Name({ name }) {
@@ -57,16 +36,9 @@ function Time({ time }) {
     return <p className={styles.personal_chat__time}>{time}</p>;
 }
 
-function Status({ status }) {
-    return getElementByStatus(status, styles.personal_chat__status);
+function UnreadMessages({ unread_messages }) {
+    if (unread_messages > 0) return <div className={styles.personal_chat__status}>{unread_messages}</div>;
+    return <></>;
 }
 
-function getElementByStatus(status, className) {
-    switch (status) {
-        case 'done':
-            return <Done width={36} className={className}/>
-        case 'done_all':
-            return <DoneAll width={36} className={className}/>
 
-    }
-}

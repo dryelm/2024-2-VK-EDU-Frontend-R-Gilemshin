@@ -7,6 +7,7 @@ html {
 
 body {
   --main-color: #8e24aa;
+  --main-color-hover: rgba(142, 36, 170, 0.8);
   --main-bg-color: #fff;
   --main-color-0: rgba(142, 36, 170, 0);
   --main-color-40: rgba(142, 36, 170, 0.4);
