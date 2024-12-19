@@ -1,14 +1,17 @@
-export function LargeTextInput({className, onInput, value, placeholder, onKeyDown}) {
+import styles from "./styles.module.css";
+import classNames from "classnames";
+export function LargeTextInput({className, onInput, value, placeholder, onKeyDown, required}) {
     const handleInput = (e) => {
-        onInput(e.target.value);
+        onInput(e.currentTarget.value);
     };
 
     return (
         <textarea
-            className={className}
+            required={required}
+            className={classNames(styles.input, className ?? "")}
             value={value}
             placeholder={placeholder}
-            onChange={handleInput}
+            onChange={event => handleInput(event)}
             onKeyDown={onKeyDown}
         />
     );

@@ -6,7 +6,7 @@ import {TextInput} from "../../components/TextInput/TextInput.jsx";
 import {useState} from "react";
 import {LargeTextInput} from "../../components/LargeTextInput/LargeTextInput.jsx";
 
-export function Field({label, placeHolder, value, setValue}) {
+function Field({label, placeHolder, value, setValue}) {
     return (
     <div className={styles.input_block}>
         <label>
@@ -21,7 +21,7 @@ export function Field({label, placeHolder, value, setValue}) {
     );
 }
 
-export function LargeField({label, placeHolder, value, setValue}) {
+function LargeField({label, placeHolder, value, setValue}) {
     return (
         <div className={styles.input_block}>
             <label>
@@ -36,8 +36,6 @@ export function LargeField({label, placeHolder, value, setValue}) {
         </div>
     );
 }
-
-
 
 export function EditProfile(){
     const [fullName, setFullName] = useState("");
@@ -64,7 +62,6 @@ export function EditProfile(){
                     value={ fullName }
                     setValue={ setFullName }
                 />
-
 
                 <Field
                     label={ "Username" }
