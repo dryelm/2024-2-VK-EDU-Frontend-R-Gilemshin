@@ -38,7 +38,7 @@ export function ChatListPage() {
         while (response['next'] !== null) {
             response = await ChatsApi.getChats(pageNumber++, pageSize);
             console.log(response);
-            chats = chats.concat(response['results'].map(x => toState(x)));
+            chats = chats.concat(response['results'].reverse().map(x => toState(x)));
         }
         setChats(chats);
     }
