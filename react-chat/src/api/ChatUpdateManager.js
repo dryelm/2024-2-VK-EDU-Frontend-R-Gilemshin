@@ -49,7 +49,7 @@ export function ChatUpdateManager(chatId, setMessages, setLatestMessage, setChat
                     if (prevMessages.some((msg) => msg.id === message.id || message.chat !== chatId)) {
                         return prevMessages;
                     }
-                    return [message, ...prevMessages];
+                    return [...prevMessages, message ];
                 });
             }
 
