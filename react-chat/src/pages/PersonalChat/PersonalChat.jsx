@@ -40,7 +40,7 @@ export function PersonalChat() {
         let response = { 'next': '' };
         while (response['next'] !== null) {
             response = await MessagesApi.getChatMessages(chatId, pageNumber++, pageSize)
-            messages = messages.concat(response['results']);
+            messages = messages.concat(response['results'].reverse());
         }
         setMessages(messages);
     };
