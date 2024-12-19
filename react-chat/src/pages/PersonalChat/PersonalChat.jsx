@@ -94,9 +94,9 @@ export function PersonalChat() {
 
 
             <div className={styles.messages}>
-                {messages.map((message, index) => ( message.sender.id === currentUser.id
-                    ? <MyMessage key={index} message={message}/>
-                    : <OthersMessage key={index} message={message} /> ))}
+                {messages.map((message) => ( message.sender.id === currentUser.id
+                    ? <MyMessage key={message.id} message={message}/>
+                    : <OthersMessage key={message.id} message={message} /> ))}
             </div>
 
             <div ref={messageContainerRef} className={styles.new_message}>
