@@ -50,7 +50,14 @@ export function ChatListPage() {
                     return [newChat, ...prevChats];
                 }
             }
-            return prevChats;
+
+            else {
+                const chatToUpdate = prevChats.find((chat) => chat.id === message.chat);
+                const oldChats = prevChats.filter((chat) => chat.id !== message.chat);
+
+                return [{...chatToUpdate, last_message: message}, ...oldChats];
+            }
+
         });
     }
 
