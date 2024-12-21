@@ -3,8 +3,8 @@ import styles from "./styles.module.css";
 import {TextInput} from "../../../../components/TextInput/TextInput.jsx";
 import {UserApi} from "../../../../api/callbacks/UserApi.js";
 import {ChatsApi} from "../../../../api/callbacks/ChatsApi.js";
-import {Button} from "../../../../components/Button/Button.jsx";
 import {CurrentUserKey} from "../../../../api/utils/ApiHelper.js";
+import {ModalWindow} from "../../../../components/ModalWindow/ModalWindow.jsx";
 
 export function CreateChatModal({ onClose }) {
     const [formData, setFormData] = useState({
@@ -54,73 +54,63 @@ export function CreateChatModal({ onClose }) {
     }, [search, loadPossibleUsers]);
 
     return (
-        <div className={styles.modalBackdrop}>
-            <form className={styles.modalContent}>
-                <h2>Редактировать группу</h2>
-                <div className={styles.inputContainer}>
-                    <label>
-                        Название группы
-                        <TextInput
-                            type="text"
-                            required={true}
-                            value={formData.title}
-                            onInput={setTitle}
-                        />
-                    </label>
-                </div>
-                <div className={styles.inputContainer}>
-                    <label>
-                        Приватная группа
-                        <input
-                            className={styles.checkbox}
-                            type="checkbox"
-                            checked={ formData.is_private }
-                            onChange={ (e) => setPrivate(e.target.checked) }
-                        />
-                    </label>
-                </div>
-
-                <div className={styles.inputContainer}>
+        <ModalWindow onClose={onClose} onSave={handleSave} header="Создать группу">
+            <div className={styles.inputContainer}>
+                <label>
+                    Название группы
                     <TextInput
-                        type='search'
-                        value={search}
-                        onInput={setSearch}
-                        placeholder="Имя или юзернейм"
-                    >
+                        type="text"
+                        required={true}
+                        value={formData.title}
+                        onInput={setTitle}
+                    />
+                </label>
+            </div>
+            <div className={styles.inputContainer}>
+                <label>
+                    Приватная группа
+                    <input
+                        className={styles.checkbox}
+                        type="checkbox"
+                        checked={ formData.is_private }
+                        onChange={ (e) => setPrivate(e.target.checked) }
+                    />
+                </label>
+            </div>
 
-                    </TextInput>
-                    {options.length !== 0 && <select
-                        className={styles.userSelect}
-                        required
-                        multiple
-                        onChange={handleSelectChange}
-                    >
-                        {options.map((option) => (
-                            <option key={ option.value } value={ option.value }>
-                                { option.label }
-                            </option>))
-                        }
-                    </select>}
-                    {options.length === 0 && <p className={styles.userSelect}>Не нашли пользователей</p>}
-                </div>
+            <div className={styles.inputContainer}>
+                <TextInput
+                    type='search'
+                    value={search}
+                    onInput={setSearch}
+                    placeholder="Имя или юзернейм"
+                >
 
-                <div className={ styles.inputContainer }>
-                <label>Аватар группы
-                        <input
-                            type="file"
-                            onChange={ handleFileChange }
-                        />
-                    </label>
-                </div>
-                <div className={ styles.controls }>
-                    <Button onClick={ handleSave }>
-                        Сохранить
-                    </Button>
-                    <Button className={styles.cancelButton} onClick={ onClose }>
-                        Отмена
-                    </Button>
-                </div>
-            </form>
-        </div>
+                </TextInput>
+                {options.length !== 0 && <select
+                    className={styles.userSelect}
+                    required
+                    multiple
+                    onChange={handleSelectChange}
+                >
+                    {options.map((option) => (
+                        <option key={ option.value } value={ option.value }>
+                            { option.label }
+                        </option>))
+                    }
+                </select>}
+                {options.length === 0 && <p className={styles.userSelect}>Не нашли пользователей</p>}
+            </div>
+
+            <div className={ styles.inputContainer }>
+            <label>Аватар группы
+                    <input
+                        type="file"
+                        onChange={ handleFileChange }
+                    />
+                </label>
+            </div>
+
+        </ModalWindow>
     );
 }

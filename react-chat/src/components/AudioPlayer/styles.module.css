@@ -1,0 +1,40 @@
+.audioPlayer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.playPauseButton {
+    padding: 0.75em;
+    display: flex;
+    justify-content: center;
+    background: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.playPauseButton:hover {
+    background: var(--main-color-hover);
+}
+
+.progressContainer {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.progressBar {
+    width: 100%;
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+}

@@ -1,5 +1,5 @@
 import {ApiConfig} from "../config/ApiConfig.js";
-import {buildQuery, fetchWithAuth, handleResponse} from "../utils/ApiHelper.js";
+import {buildQuery, DefaultHeaders, fetchWithAuth, handleResponse} from "../utils/ApiHelper.js";
 
 async function getChats(page, page_size, search = null) {
     const query = buildQuery({ page, page_size, search });
@@ -17,7 +17,8 @@ async function getChat(id) {
 async function createChat(formData) {
     return await fetchWithAuth(`${ApiConfig.baseUrl}/api/chats/`, {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        headers: DefaultHeaders
     }).then(async res => await handleResponse(res));
 }
 

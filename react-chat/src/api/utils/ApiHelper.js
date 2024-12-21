@@ -41,7 +41,6 @@ export async function fetchWithAuth(url, options = {}, retryCount = 1) {
     }
 
     options.headers = {
-        ...DefaultHeaders,
         ...options.headers,
         "Authorization": `Bearer ${access}`
     };
