@@ -2,10 +2,11 @@ import {ChatList} from "./components/chat-list/ChatList.jsx";
 import {AppHeader} from "../../components/AppHeader/AppHeader.jsx";
 import {NewChatButton} from "./components/new-chat-button/NewChatButton.jsx";
 import {Menu, Search} from "@mui/icons-material";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import {ChatsApi} from "../../api/callbacks/ChatsApi.js";
-import {ChatUpdateManager} from "../../api/ChatUpdateManager.js";
 import {CreateChatModal} from "./components/CreateChatModal/CreateChatModal.jsx";
+import {ChatUpdateManager} from "../../api/ChatUpdateManager.js";
+import {CurrentUserKey} from "../../api/utils/ApiHelper.js";
 
 
 export function ChatListPage() {
@@ -13,35 +14,70 @@ export function ChatListPage() {
     const [isCreateChatOpen, setIsCreateChatOpen] = useState(false);
     const manager = useRef(null);
 
-    useEffect(() => {
-        void loadChats();
-        manager.current = ChatUpdateManager(null, null, null, setChats);
-        return manager.current.unsubscribe;
-    }, []);
+    const getPreview = (last_message) => {
+        if (!last_message){
+            return "Ещё нет сообщений"
+        }
+        if (last_message.voice){
+            return "Голосовое сообщение"
+        }
 
-    const toState = (x) => {
+        if (!last_message.text){
+            return last_message.files.join(", ")
+        }
+
+        return last_message.text;
+    }
+
+    const toState = useCallback((x) => {
         return {
             id: x.id,
             avatar: x.avatar,
             time: new Date(x.updated_at).toLocaleString(),
             name: x.title,
-            preview: x.last_message.text,
+            preview: getPreview(x.last_message),
             unread_messages: x.unread_messages
         };
-    };
+    }, []);
 
-    async function loadChats() {
+
+    const onMessage = async (message) => {
+        const newChat = await ChatsApi.getChat(message.chat);
+        const currentUser = localStorage.getItem(CurrentUserKey);
+        setChats((prevChats) => {
+            if (!prevChats.some((chat) => chat.id === message.chat)) {
+                if (newChat.members.some((user) => user.id === currentUser['id'])) {
+                    return [newChat, ...prevChats];
+                }
+            }
+
+            else {
+                const chatToUpdate = prevChats.find((chat) => chat.id === message.chat);
+                const oldChats = prevChats.filter((chat) => chat.id !== message.chat);
+
+                return [{...chatToUpdate, last_message: message}, ...oldChats];
+            }
+
+        });
+    }
+
+    const loadChats = useCallback(async () => {
         let pageNumber = 1;
         let pageSize = 30;
         let chats = [];
         let response = { 'next': '' };
         while (response['next'] !== null) {
             response = await ChatsApi.getChats(pageNumber++, pageSize);
-            console.log(response);
             chats = chats.concat(response['results'].reverse().map(x => toState(x)));
         }
         setChats(chats);
-    }
+    }, [toState]);
+
+    useEffect(() => {
+        void loadChats();
+        manager.current = ChatUpdateManager(onMessage);
+        return manager.current.unsubscribe;
+    }, [loadChats]);
 
     return (
         <div className="chat-list-page">
