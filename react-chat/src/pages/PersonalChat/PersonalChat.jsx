@@ -7,17 +7,17 @@ import {AppHeader} from "../../components/AppHeader/AppHeader.jsx";
 import {AppRoutes} from "../../utils/types/AppRoutes.js";
 import {MessagesApi} from "../../api/callbacks/MessagesApi.js";
 import {ChatsApi} from "../../api/callbacks/ChatsApi.js";
-import {CurrentUserKey} from "../../api/utils/ApiHelper.js";
 import {toast} from "react-toastify";
 import {AudioPlayer} from "../../components/AudioPlayer/AudioPlayer.jsx";
 import {useVoiceRecorder} from "../../components/hooks/useVoiceRecorder/useVoiceRecorder.js";
 import {ChatUpdateManager} from "../../api/ChatUpdateManager.js";
 import {sendNotification} from "../../utils/notifier/sendNotification.js";
+import {useCurrentUserStore} from "../../utils/store/currentUserStore.js";
 
 export function PersonalChat() {
     const {chatId} = useParams()
     const manager = useRef(null);
-    const currentUser = JSON.parse(localStorage.getItem(CurrentUserKey));
+    const {currentUser} = useCurrentUserStore();
     const [messages, setMessages] = useState([]);
     const [chatInfo, setChatInfo] = useState({avatar: "", title: ""});
     const [messageText, setMessageText] = useState('');
@@ -125,15 +125,13 @@ export function PersonalChat() {
     };
 
     useEffect(() => {
-        console.log(messages.length);
-    }, [messages]);
-
-    useEffect(() => {
         loadChatInfo(chatId);
         loadMessages(chatId);
-        manager.current = ChatUpdateManager(onMessage);
-        return manager.current.unsubscribe;
-        }, [chatId, onMessage]
+        manager.current = ChatUpdateManager(onMessage, currentUser);
+        return () => {
+            manager.current.unsubscribe();
+        }
+        }, [chatId, currentUser, onMessage]
     );
 
     useEffect(() => {

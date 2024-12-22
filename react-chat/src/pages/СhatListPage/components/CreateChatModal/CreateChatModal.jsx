@@ -3,8 +3,8 @@ import styles from "./styles.module.css";
 import {TextInput} from "../../../../components/TextInput/TextInput.jsx";
 import {UserApi} from "../../../../api/callbacks/UserApi.js";
 import {ChatsApi} from "../../../../api/callbacks/ChatsApi.js";
-import {CurrentUserKey} from "../../../../api/utils/ApiHelper.js";
 import {ModalWindow} from "../../../../components/ModalWindow/ModalWindow.jsx";
+import {useCurrentUserStore} from "../../../../utils/store/currentUserStore.js";
 
 export function CreateChatModal({ onClose }) {
     const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ export function CreateChatModal({ onClose }) {
 
     const [options, setOptions] = useState([]);
     const [search, setSearch] = useState("");
+    const {currentUser} = useCurrentUserStore();
 
     const setTitle = (value) => setFormData({ ...formData, title: value });
     const setPrivate = (value) => setFormData({ ...formData, is_private: value });
@@ -33,9 +34,8 @@ export function CreateChatModal({ onClose }) {
     }
 
     const handleSave = async () => {
-        const creator = localStorage.getItem(CurrentUserKey);
         let data = formData;
-        data ={...data, creator: creator};
+        data ={...data, creator: currentUser};
         await ChatsApi.createChat(data);
         onClose();
     };

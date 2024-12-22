@@ -4,8 +4,9 @@ import {useState} from "react";
 import {AuthApi} from "../../api/callbacks/AuthApi.js";
 import {Link, useNavigate} from "react-router-dom";
 import {AppRoutes} from "../../utils/types/AppRoutes.js";
-import {storeTokens, storeUser} from "../../api/utils/ApiHelper.js";
 import {UserApi} from "../../api/callbacks/UserApi.js";
+import {useCurrentUserStore} from "../../utils/store/currentUserStore.js";
+import {useAuthStore} from "../../utils/store/tokensStore.js";
 
 export function AuthPage(){
     const goTo = useNavigate();
@@ -16,12 +17,14 @@ export function AuthPage(){
 
     const setUserName = (value) => setFormData({...formData, username: value});
     const setPassword = (value) => setFormData({...formData, password: value});
+    const {setCurrentUser} = useCurrentUserStore()
+    const {setTokens} = useAuthStore()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = await AuthApi.auth(formData);
-        storeTokens(data);
-        storeUser(await UserApi.getUser("current"))
+        setTokens(data);
+        setCurrentUser(await UserApi.getUser("current"))
         goTo(AppRoutes.HomePage);
     };
 

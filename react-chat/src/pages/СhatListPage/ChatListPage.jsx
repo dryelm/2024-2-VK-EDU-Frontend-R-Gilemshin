@@ -6,13 +6,14 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import {ChatsApi} from "../../api/callbacks/ChatsApi.js";
 import {CreateChatModal} from "./components/CreateChatModal/CreateChatModal.jsx";
 import {ChatUpdateManager} from "../../api/ChatUpdateManager.js";
-import {CurrentUserKey} from "../../api/utils/ApiHelper.js";
+import {useCurrentUserStore} from "../../utils/store/currentUserStore.js";
 
 
 export function ChatListPage() {
     const [chats, setChats] = useState([]);
     const [isCreateChatOpen, setIsCreateChatOpen] = useState(false);
     const manager = useRef(null);
+    const {currentUser} =  useCurrentUserStore()
 
     const getPreview = (last_message) => {
         if (!last_message){
@@ -43,7 +44,6 @@ export function ChatListPage() {
 
     const onMessage = async (message) => {
         const newChat = await ChatsApi.getChat(message.chat);
-        const currentUser = localStorage.getItem(CurrentUserKey);
         setChats((prevChats) => {
             if (!prevChats.some((chat) => chat.id === message.chat)) {
                 if (newChat.members.some((user) => user.id === currentUser['id'])) {
@@ -57,7 +57,6 @@ export function ChatListPage() {
 
                 return [{...chatToUpdate, last_message: message}, ...oldChats];
             }
-
         });
     }
 
@@ -75,9 +74,9 @@ export function ChatListPage() {
 
     useEffect(() => {
         void loadChats();
-        manager.current = ChatUpdateManager(onMessage);
+        manager.current = ChatUpdateManager(onMessage, currentUser);
         return manager.current.unsubscribe;
-    }, [loadChats]);
+    }, [currentUser, loadChats]);
 
     return (
         <div className="chat-list-page">

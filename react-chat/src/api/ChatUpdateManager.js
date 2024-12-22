@@ -1,9 +1,8 @@
 import { Centrifuge } from 'centrifuge';
 import {ApiConfig} from "./config/ApiConfig.js";
-import {CurrentUserKey, fetchWithAuth} from "./utils/ApiHelper.js";
+import {fetchWithAuth} from "./utils/ApiHelper.js";
 
-export function ChatUpdateManager(onMessage) {
-    const currentUser = JSON.parse(localStorage.getItem(CurrentUserKey));
+export function ChatUpdateManager(onMessage, currentUser) {
 
     function getConnectionToken() {
         return (ctx) =>
