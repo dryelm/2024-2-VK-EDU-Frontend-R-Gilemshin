@@ -23,7 +23,7 @@ li{
     animation: none;
 }
 .personal_chat__avatar{
-    grid-row: span 2;
+    grid-row: 1 / span 2;
     height: 4em;
     border-radius: 2em;
     box-shadow: 0 0 0 var(--main-color);
@@ -68,6 +68,8 @@ li{
     white-space: nowrap;
     overflow: hidden;         
     height: fit-content;
+    grid-row: 1;
+    grid-column: 2;
     text-overflow: ellipsis;  
 }
 

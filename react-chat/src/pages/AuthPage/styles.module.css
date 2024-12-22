@@ -1,0 +1,71 @@
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--main-color);
+}
+
+
+.fields{
+    display: inline;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: fit-content;
+    border: black 1px solid;
+    padding: 3em;
+    background-color: var(--main-bg-color);
+    border-radius: 1em;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.field{
+    border: #333 1px solid;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 1em;
+}
+
+.field__input{
+    margin-top: 0.5em;
+    border-bottom: 1px #333 solid;
+}
+
+.field__large_input{
+    margin-top: 0.5em;
+    border-bottom: 1px #333 solid;
+    font: inherit;
+    font-size: 1.25em;
+}
+
+.submitButton{
+    border: none;
+    background-color: var(--main-color);
+    padding: 1em 2em;
+    color: var(--main-bg-color);
+    border-radius: 1em;
+    cursor: pointer;
+}
+
+.submitButton:hover{
+    background-color: var(--main-color-hover);
+}
+
+.controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.changePage{
+    text-decoration-line: underline;
+}
+
+.changePage:hover{
+    text-decoration-line: underline;
+}

@@ -9,6 +9,11 @@
     width: 4em;
 }
 
+.add_chat_button:hover{
+    background-color: rgba(249, 214, 103, 0.71);
+}
+
+
 .black-icon{
     font-size: 2em;
     color: rgba(0, 0, 0);
