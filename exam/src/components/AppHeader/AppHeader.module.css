@@ -1,0 +1,8 @@
+.header{
+    padding: 20px;
+    font-size: 1.5em;
+    position: sticky;
+    color: #5f6367;
+    min-height: 5%;
+    border-bottom: #333333 1px solid;
+}

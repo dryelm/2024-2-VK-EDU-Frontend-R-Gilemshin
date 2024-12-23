@@ -1,0 +1,64 @@
+.mainControls{
+    position: relative;
+    display: grid;
+    gap: 10px;
+    border: 1px #333333 solid;
+    padding: 10px;
+    box-shadow: 0 0 2px 0 #333333;
+    grid-template-columns: repeat(2, auto);
+    grid-template-rows: 50px auto;
+}
+
+.languageOption{
+    font-weight: bold;
+    background: none;
+    border: none;
+    padding: 5px;
+}
+
+.languageOption__active{
+    border-bottom: #1e73e8 4px solid;
+    color: #1e73e8;
+}
+
+.switchLangs{
+    position: absolute;
+    border: none;
+    background: none;
+    top: 8px;
+    left: 50%;
+    width: fit-content;
+}
+
+.submitButton{
+    margin-right: 0;
+    box-shadow: 0 0 2px 0 #333333;
+    margin-top: 10px;
+    padding: 10px 15px ;
+    border: none;
+    background-color: #1e73e8;
+    color: #fff;
+    cursor: pointer;
+}
+
+.submitButton:hover{
+    background-color: rgba(30, 115, 232, 0.69);
+}
+.history{
+    margin: 10px;
+    display: flex;
+}
+
+.historyBtn{
+    display: inline;
+    padding: 2px;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    background: none;
+    border-radius: 12px;
+}
+
+.historyBtn:hover{
+    background-color: rgba(51, 51, 51, 0.15);
+}
