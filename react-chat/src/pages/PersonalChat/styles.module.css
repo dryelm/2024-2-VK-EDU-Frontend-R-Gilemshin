@@ -1,4 +1,4 @@
-.form {
+.page {
     display: grid;
     grid-template-rows: 6em repeat(10, auto) 6em;
     grid-template-columns: auto;
@@ -19,7 +19,7 @@
     gap: 0.1em;
     font-size: 1.2em;
     line-height: 1.2em;
-    flex-direction: column;
+    flex-direction: column-reverse;
     justify-content: end;
     grid-row-start: span 10;
 }
@@ -85,8 +85,7 @@ input[type=submit] {
 }
 
 .new_message__input{
-    width: 100%;
-    height: 100%;
+    font: inherit;
     line-height: 1.2em;
     font-size: 1.2em;
     max-height: 76px;
@@ -98,6 +97,10 @@ input[type=submit] {
     overflow-y: auto;
 }
 
+.mainControl{
+    width: 100%;
+    height: 100%;
+}
 .new_message__input:focus-visible{
     border: none;
 }
@@ -143,4 +146,70 @@ input {
 }
 .form__header h6{
     font-size: 0.9em;
+}
+
+.attachmentContainer {
+    position: relative; /* Контейнер для позиционирования меню */
+}
+
+.attachmentMenu {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 10px;
+}
+
+.menuItem {
+    background: none;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.menuItem:last-child {
+    border-bottom: none; /* Убираем нижнюю границу у последнего элемента */
+}
+
+.menuItem:hover {
+    background-color: #f5f5f5; /* Подсветка при наведении */
+}
+
+.icon{
+
+}
+
+.activeMic{
+    animation: pulse 1s infinite;
+    border-radius: 1em;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+    70% {
+        box-shadow: 0 0 0 10px var(--main-color-40);
+    }
+    100% {
+
+        box-shadow: 0 0 0 0 var(--main-color-0);
+    }
+}
+
+.image{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
 }

@@ -18,7 +18,7 @@ async function getMessage(id) {
 async function sendMessage(formData) {
     return await fetchWithAuth(`${ApiConfig.baseUrl}/api/messages/`, {
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: formData,
     }).then(async res => await handleResponse(res));
 }
 
