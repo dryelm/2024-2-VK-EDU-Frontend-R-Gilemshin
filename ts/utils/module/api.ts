@@ -5,7 +5,7 @@ const BASE_URL = 'https://api.mymemory.translated.net';
 
 export async function fetchTranslation(params: TranslateParams): Promise<TranslateResponse> {
     const { text, from, to, autoDetect } = params;
-    const langpair = autoDetect ? `auto|${to}` : `${from}|${to}`;
+    const langpair = autoDetect ? `Autodetect|${to}` : `${from}|${to}`;
     const url = `${BASE_URL}/get?q=${encodeURIComponent(text)}&langpair=${langpair}`;
 
     try {
