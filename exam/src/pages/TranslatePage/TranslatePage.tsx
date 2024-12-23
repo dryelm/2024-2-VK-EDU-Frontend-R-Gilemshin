@@ -44,7 +44,7 @@ export function TranslatePage() {
 
     function swapLangs() {
         const to = languageTo;
-        if (to === LanguagesEnum.Autodetect)
+        if (languageFrom === LanguagesEnum.Autodetect)
             return;
         setLanguageTo(languageFrom)
         setLanguageFrom(to);
