@@ -42,6 +42,14 @@ export function TranslatePage() {
     }, [addResult, languageFrom, languageTo, textToTranslate]);
 
 
+    function swapLangs() {
+        const to = languageTo;
+        if (to === LanguagesEnum.Autodetect)
+            return;
+        setLanguageTo(languageFrom)
+        setLanguageFrom(to);
+    }
+
     return (<Page>
         <div className={styles.mainControls}>
             <div>
@@ -90,7 +98,7 @@ export function TranslatePage() {
             <LargeTextInput onInput={() => {
             }} value={translatedText} placeholder={"Translation"}/>
 
-            <Button className={styles.switchLangs}>
+            <Button className={styles.switchLangs} onClick={swapLangs}>
                 <SwapHoriz/>
             </Button>
         </div>
