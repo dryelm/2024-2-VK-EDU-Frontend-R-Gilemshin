@@ -37,9 +37,11 @@ export function AudioPlayer({ src }) {
     };
 
     useEffect(() => {
+        const ref = audioRef.current;
+
         return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
+            if (ref) {
+                ref.pause();
             }
         };
     }, []);

@@ -42,7 +42,7 @@ export function ChatListPage() {
     }, []);
 
 
-    const onMessage = async (message) => {
+    const onMessage = useCallback(async (message) => {
         const newChat = await ChatsApi.getChat(message.chat);
         setChats((prevChats) => {
             if (!prevChats.some((chat) => chat.id === message.chat)) {
@@ -58,7 +58,7 @@ export function ChatListPage() {
                 return [{...chatToUpdate, last_message: message}, ...oldChats];
             }
         });
-    }
+    }, [currentUser])
 
     const loadChats = useCallback(async () => {
         let pageNumber = 1;
@@ -76,7 +76,7 @@ export function ChatListPage() {
         void loadChats();
         manager.current = ChatUpdateManager(onMessage, currentUser);
         return manager.current.unsubscribe;
-    }, [currentUser, loadChats]);
+    }, [currentUser, loadChats, onMessage]);
 
     return (
         <div className="chat-list-page">
