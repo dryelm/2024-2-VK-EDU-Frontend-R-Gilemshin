@@ -14,7 +14,7 @@ jobs:
         run: npm i
       - name: Run linter
         working-directory: ./react-chat
-        run: npm run lint
+        run: npm run lint --max-warnings=0
       - name: Build app
         working-directory: ./react-chat
         run: npm run build
