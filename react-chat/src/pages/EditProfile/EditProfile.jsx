@@ -5,6 +5,7 @@ import styles from "./styles.module.css"
 import {TextInput} from "../../components/TextInput/TextInput.jsx";
 import {useState} from "react";
 import {LargeTextInput} from "../../components/LargeTextInput/LargeTextInput.jsx";
+import {LazyImage} from "../../components/LazyImage/LazyImage.jsx";
 
 function Field({label, placeHolder, value, setValue}) {
     return (
@@ -50,7 +51,7 @@ export function EditProfile(){
             />
 
             <div>
-                <img src={ imgUrl } className={ styles.profile_picture__img } alt={ "Edit profile picture" }/>
+                <LazyImage src={ imgUrl } className={ styles.profile_picture__img } alt={ "Edit profile picture" }/>
                 <div className={ styles.camera_icon }>
                     <CameraAlt/>
                 </div>
