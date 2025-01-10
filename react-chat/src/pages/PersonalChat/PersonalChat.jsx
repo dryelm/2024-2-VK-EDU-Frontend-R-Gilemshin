@@ -13,6 +13,7 @@ import {useVoiceRecorder} from "../../components/hooks/useVoiceRecorder/useVoice
 import {ChatUpdateManager} from "../../api/ChatUpdateManager.js";
 import {sendNotification} from "../../utils/notifier/sendNotification.js";
 import {useCurrentUserStore} from "../../utils/store/currentUserStore.js";
+import {LazyImage} from "../../components/LazyImage/LazyImage.jsx";
 
 export function PersonalChat() {
     const {chatId} = useParams()
@@ -154,7 +155,7 @@ export function PersonalChat() {
                 pageDescription={
                     <>
                         { chatInfo.avatar &&
-                            <img id="avatar" src={ chatInfo.avatar } alt="Avatar" className={ styles.avatar }/> }
+                            <LazyImage id="avatar" src={ chatInfo.avatar } alt="Avatar" className={ styles.avatar }/> }
                         <article>
                             <h5>{ chatInfo.title }</h5>
                         </article>

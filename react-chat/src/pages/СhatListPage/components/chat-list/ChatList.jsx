@@ -1,6 +1,7 @@
 import styles from './chat-list.module.css';
 import {Link} from "react-router-dom";
 import {AppRoutes} from "../../../../utils/types/AppRoutes.js";
+import {LazyImage} from "../../../../components/LazyImage/LazyImage.jsx";
 
 export function ChatList({chatList}) {
     return (
@@ -21,7 +22,7 @@ export function ChatList({chatList}) {
 }
 
 function Avatar({ avatarPath, pulse = false }) {
-    return avatarPath ? <img className={`${styles.personal_chat__avatar} ${pulse ? styles.pulse : ''}`} src={avatarPath} alt="avatar" /> : <div></div>;
+    return avatarPath ? <LazyImage className={`${styles.personal_chat__avatar} ${pulse ? styles.pulse : ''}`} src={avatarPath} alt="avatar" /> : <div></div>;
 }
 
 function Name({ name }) {
